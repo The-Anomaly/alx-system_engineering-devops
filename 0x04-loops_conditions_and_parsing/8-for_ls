@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Bash script that displays the content of the current directory in a list format
+
+dir=$(ls | sed 's/^.*-//')
+
+for file in $dir
+do
+	echo "$file"
+done
