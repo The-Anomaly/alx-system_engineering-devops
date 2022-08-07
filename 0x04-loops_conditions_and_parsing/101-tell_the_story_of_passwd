@@ -3,7 +3,7 @@
 
 file=/etc/passwd
 
-while IFS=: read -r uname pwd uid gid uidinfo hdir cmd line;
+while IFS=: read -r uname pwd uid gid uidinfo hdir cmd;
 do
 	echo "The user $uname is part of the $gid gang,"\
 	"lives in $hdir and rides $cmd."\
