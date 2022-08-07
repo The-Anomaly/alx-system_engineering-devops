@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Bash script that displays numbers from 1 to 20 and accounts for superstitious numbers.
+num=1
+while [ "$num" -le 20 ]
+do
+	case $num in
+		4)
+			echo -e "$num\nbad luck from China"
+			;;
+		9)
+			echo -e "$num\nbad luck from Japan"
+			;;
+		17)
+			echo -e "$num\nbad luck from Italy"
+			;;
+		*)
+			echo "$num"
+			;;
+	esac		
+	num=$(( num + 1 ))
+done
