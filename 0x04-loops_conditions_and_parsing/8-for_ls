@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Bash script that displays the content of the current directory in a list format
 
-dir=$(find . -not -path '.'  | sed 's/^.*-//')
+dir=$(ls)
 
 for file in $dir
 do
-	echo "$file"
+	echo "$file" | sed 's/^.*-//'
 done
