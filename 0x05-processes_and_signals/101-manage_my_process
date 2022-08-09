@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Bash (init) script 101-manage_my_process that manages manage_my_process
+
+
+function start() {
+	# start process
+	./manage_my_process &
+	id=$(pgrep "bash ./manage_my_process" -f)
+	echo "$id" > /var/run/my_process.pid
+}
+
+
+function stop() {
+	# stop process
+	read -r bgid < /var/run/my_process.pid
+	kill "$bgid"
+	rm /var/run/my_process.pid
+}
+
+if [ "$1" == "start" ]
+then
+	start
+	echo "manage_my_process started"
+elif [ "$1" == "stop" ]
+then
+	stop
+	echo "manage_my_process stopped"
+elif [ "$1" == "restart" ]
+then
+	stop
+	start
+	echo "manage_my_process restarted"
+else
+	echo "Usage: manage_my_process {start|stop|restart}"
+fi
+
