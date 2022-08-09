@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Bash script that displays To infinity and beyond indefinitely
+
+trap func SIGTERM
+
+function func() {
+	echo "I am invincible!!!"
+}
+
+while 'true'
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
