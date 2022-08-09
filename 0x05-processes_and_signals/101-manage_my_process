@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
 # Bash (init) script 101-manage_my_process that manages manage_my_process
 
+pid_file=/var/run/my_process.pid
 
 function start() {
-	# start process
 	./manage_my_process &
-	id=$(pgrep "bash ./manage_my_process" -f)
-	echo "$id" > /var/run/my_process.pid
+	echo "$!" > "$pid_file"
 }
 
-
 function stop() {
-	# stop process
-	read -r bgid < /var/run/my_process.pid
-	kill "$bgid"
-	rm /var/run/my_process.pid
+	read -r bgid < "$pid_file"
+	kill "$bgid" &&	rm -f "$pid_file"
 }
 
 if [ "$1" == "start" ]
