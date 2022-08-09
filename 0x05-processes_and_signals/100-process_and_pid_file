@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Bash script that displays To infinity and beyond indefinitely
+
+trap func && func_2 SIGTERM
+trap func_1 SIGINT
+trap func_2 SIGQUIT
+
+
+function func() {
+	echo "I hate the kill command"
+}
+
+function func_1() {
+	echo "Y U no love me?!"
+}
+
+function func_2() {
+	rm /var/run/myscript.pid
+	exit
+}
+
+echo "$$" > /var/run/myscript.pid
+
+while 'true'
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
