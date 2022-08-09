@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Bash script that displays To infinity and beyond indefinitely
 
-trap func && func_2 SIGTERM
+trap 'func && func_2' SIGTERM
 trap func_1 SIGINT
 trap func_2 SIGQUIT
 
