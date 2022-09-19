@@ -1,0 +1,11 @@
+# SSH config file
+# configure ssh client to:
+# Authenticate without password
+# Use the private key ~/.ssh/school
+
+Host *
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
