@@ -1,22 +1,21 @@
 # Install and configure nginx
-package { 'jfryman-nginx':
+package { 'nginx':
   ensure => installed,
 }
 
-include nginx
-
-class { 'nginx':
-  manage_repo    => true,
-  package_source => 'nginx-stable',
-}
-
-nginx::resource::server { '44.200.141.48':
-  listen_port      => 80,
-  www_root         => '/var/www/html/',
-  vhost_cfg_append => { 'rewrite' => '^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent' },
-}
-
-file { 'index':
-  path    => '/var/www/html/index.nginx-debian.html',
+file { ''/var/www/html/index.html':
+  path    => '/var/www/html/index.html',
   content => 'Hello World!',
+}
+
+file_line { 'redirect rule':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen [::]:80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+}
+
+service { 'nginx':
+  ensure  => running,
+  require => Package['nginx'],
 }
