@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Fix port connection
-sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
-sed -i "s/ ipv6only=on//" /etc/nginx/sites-enabled/default
-sed -i "s/ ipv6only=on//" /etc/nginx/sites-available/default
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
