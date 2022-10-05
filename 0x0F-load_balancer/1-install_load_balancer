@@ -20,4 +20,4 @@ backend myservers
 sed  -i "$ a $load_balancing" /etc/haproxy/haproxy.cfg
 sed -i '$ a ENABLED=1' /etc/default/haproxy
 
-sudo systemctl restart haproxy
+sudo service haproxy restart
