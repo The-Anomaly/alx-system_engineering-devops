@@ -4,6 +4,9 @@ sudo apt-get install --no-install-recommends software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-2.6
 sudo apt-get install haproxy=2.6.\*
 
+sudo cp /etc/haproxy/haproxy.cfg{,.original}
+sudo cp /etc/default/haproxy{,.original}
+
 load_balancing=\
 "frontend myfrontend
         bind :80
@@ -14,6 +17,7 @@ backend myservers
         server server1 44.200.141.48
         server server2 3.236.120.136"
 
-echo "$load_balancing" >> /etc/haproxy/haproxy.cfg
+sed  -i "$ a $load_balancing" /etc/haproxy/haproxy.cfg
+sed -i '$ a ENABLED=1' /etc/default/haproxy
 
 sudo systemctl restart haproxy
