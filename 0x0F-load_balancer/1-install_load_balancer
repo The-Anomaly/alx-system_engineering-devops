@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # install and configure HAproxy on the lb-01 server
-sudo apt-get install --no-install-recommends software-properties-common
-sudo add-apt-repository ppa:vbernat/haproxy-2.6
-sudo apt-get install haproxy=2.6.\*
+sudo apt-get -y install --no-install-recommends software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.6
+sudo apt-get -y install haproxy=2.6.\*
 
 sudo cp /etc/haproxy/haproxy.cfg{,.original}
 sudo cp /etc/default/haproxy{,.original}
@@ -17,7 +17,8 @@ backend myservers
         server server1 44.200.141.48
         server server2 3.236.120.136"
 
-sed  -i "$ a $load_balancing" /etc/haproxy/haproxy.cfg
-sed -i '$ a ENABLED=1' /etc/default/haproxy
+# sudo sed -i "$ a $load_balancing" /etc/haproxy/haproxy.cfg
+echo "$load_balancing" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+sudo sed -i '$ a ENABLED=1' /etc/default/haproxy
 
 sudo service haproxy restart
